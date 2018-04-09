@@ -16,7 +16,7 @@ str_column_to_int(dataset, len(dataset[0])-1)
 n_folds = 5
 learn_rate = 0.3
 n_epochs = 50
-n_codebooks = 20
-scores = evaluate_algorithm(dataset, learning_vector_quantization, n_folds, n_codebooks, learn_rate, n_epochs)
+n_prototypes = 50
+scores = evaluate_algorithm(dataset, learning_vector_quantization, n_folds, n_prototypes, learn_rate, n_epochs)
 print('Scores: %s' % scores)
 print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))

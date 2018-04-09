@@ -1,5 +1,6 @@
 from EuclideanDistance import euclidean_distance
 from random import randrange
+from sklearn.neighbors import NearestNeighbors
 
 def nearest_prototype(training_instace, prototypes):
     distances = list()
@@ -33,14 +34,14 @@ def train_prototypes(training_data, n_prototypes, learning_rate, epochs):
                     closer[i] += rate*error
                 else:
                     closer[i] -= rate*error
-                #print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, rate, sum_error))
+                print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, rate, sum_error))
     return prototypes
 
 # LVQ Algorithm
 def learning_vector_quantization(train, test, n_prototypes, lrate, epochs):
-	codebooks = train_prototypes(train, n_prototypes, lrate, epochs)
+	prototypes = train_prototypes(train, n_prototypes, lrate, epochs)
 	predictions = list()
 	for row in test:
-		output = predict(codebooks, row)
+		output = predict(prototypes, row)
 		predictions.append(output)
 	return(predictions)
