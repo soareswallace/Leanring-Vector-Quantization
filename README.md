@@ -1,1 +1,1 @@
-# Leanring-Vector-Quantization
+# LearNing-Vector-Quantization
