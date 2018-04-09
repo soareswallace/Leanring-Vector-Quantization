@@ -16,11 +16,10 @@ def random_prototypes(training_data):
     return prototype
 
 def predict(prototypes, test_row):
-	bmu = nearest_prototype(prototypes, test_row)
+	bmu = nearest_prototype(test_row, prototypes)
 	return bmu[-1]
 
 def train_prototypes(training_data, n_prototypes, learning_rate, epochs):
-    print "ENTREI"
     prototypes = [random_prototypes(training_data) for i in range(n_prototypes)]
     for epoch in range(epochs):
         rate = learning_rate*(1.0-(epoch/float(epochs)))
