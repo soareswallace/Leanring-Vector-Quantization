@@ -10,17 +10,18 @@ def accuracy_metric(actual, predicted):
  
 # Evaluate an algorithm using a cross validation split
 def evaluate_algorithm(dataset, algorithm, n_folds, *args):
-	folds = cross_validation_split(dataset, n_folds)
+	folds = cross_validation_split(dataset, n_folds) #separa o dataset em n folds
 	scores = list()
 	for fold in folds:
-		train_set = list(folds)
-		train_set.remove(fold)
-		train_set = sum(train_set, [])
+		train_set = list(folds) #treinamento sao todos os folds
+		train_set.remove(fold) #remove o fold que esta sendo usado atualmente na lista de folds
+		train_set = sum(train_set, []) #pega o treinamento e junta em um array so
 		test_set = list()
 		for row in fold:
 			row_copy = list(row)
 			test_set.append(row_copy)
-			row_copy[-1] = None
+			row_copy[-1] = None #como python eh orientado a ponteiro
+			#ao executar esse comando a ultima coluna do test set se torna none
 		predicted = algorithm(train_set, test_set, *args)
 		actual = [row[-1] for row in fold]
 		accuracy = accuracy_metric(actual, predicted)

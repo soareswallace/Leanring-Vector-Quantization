@@ -13,7 +13,7 @@ for i in range(len(dataset[0])-1):
 # convert class column to integers
 str_column_to_int(dataset, len(dataset[0])-1)
 # evaluate algorithm
-n_folds = 5
+n_folds = 10
 learn_rate = 0.3
 n_epochs = 50
 n_prototypes = 50

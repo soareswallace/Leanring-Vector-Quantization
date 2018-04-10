@@ -2,10 +2,17 @@ from EuclideanDistance import euclidean_distance
 from random import randrange
 from sklearn.neighbors import NearestNeighbors
 
-def nearest_prototype(training_instace, prototypes):
+def nearest_prototype(training_instance, prototypes):
     distances = list()
+    knn = NearestNeighbors()   
+    Y = []
+    x = []
     for prototype in prototypes:
-        distance = euclidean_distance(prototype, training_instace)
+        Y.append(prototype[-1])
+        x.append(prototype[:-1])
+    knn.fit(x, Y)
+    for prototype in prototypes:        
+        distance = euclidean_distance(prototype, training_instance)
         distances.append((prototype, distance))
     distances.sort(key=lambda tup: tup[1])
     return distances[0][0]
@@ -22,6 +29,7 @@ def predict(prototypes, test_row):
 
 def train_prototypes(training_data, n_prototypes, learning_rate, epochs):
     prototypes = [random_prototypes(training_data) for i in range(n_prototypes)]
+    #gerando os prototipos
     for epoch in range(epochs):
         rate = learning_rate*(1.0-(epoch/float(epochs)))
         sum_error = 0.0
@@ -34,6 +42,7 @@ def train_prototypes(training_data, n_prototypes, learning_rate, epochs):
                     closer[i] += rate*error
                 else:
                     closer[i] -= rate*error
+                print prototypes
                 print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, rate, sum_error))
     return prototypes
 
