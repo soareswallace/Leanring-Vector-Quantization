@@ -4,16 +4,9 @@ from sklearn.neighbors import NearestNeighbors
 
 def nearest_prototype(training_instance, prototypes):
     distances = list()
-    knn = NearestNeighbors()   
-    Y = []
-    x = []
-    for prototype in prototypes:
-        Y.append(prototype[-1])
-        x.append(prototype[:-1])
-    knn.fit(x, Y)
     for prototype in prototypes:        
-        distance = euclidean_distance(prototype, training_instance)
-        distances.append((prototype, distance))
+         distance = euclidean_distance(prototype, training_instance)
+         distances.append((prototype, distance))
     distances.sort(key=lambda tup: tup[1])
     return distances[0][0]
 
