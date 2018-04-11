@@ -35,7 +35,7 @@ def train_prototypes(training_data, n_prototypes, learning_rate, epochs):
                     closer[i] += rate*error
                 else:
                     closer[i] -= rate*error
-                print prototypes
+                #print prototypes
                 print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, rate, sum_error))
     return prototypes
 

@@ -19,11 +19,11 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 		test_set = list()
 		for row in fold:
 			row_copy = list(row)
-			test_set.append(row_copy)
+			test_set.append(row_copy) # row_copy eh uma copia de cada instancia que tera a classe removida
 			row_copy[-1] = None #como python eh orientado a ponteiro
 			#ao executar esse comando a ultima coluna do test set se torna none
-		predicted = algorithm(train_set, test_set, *args)
-		actual = [row[-1] for row in fold]
+		predicted = algorithm(train_set, test_set, *args) #test set eh o fold atual sem a identificacao da classe
+		actual = [row[-1] for row in fold] #train_set sao todos os folds sem o que esta sendo testado
 		accuracy = accuracy_metric(actual, predicted)
 		scores.append(accuracy)
 	return scores

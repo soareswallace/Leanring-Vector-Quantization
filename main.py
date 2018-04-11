@@ -6,15 +6,16 @@ from random import seed
 # Test LVQ on Ionosphere dataset
 seed(1)
 # load and prepare data
-filename = 'ionosphere.csv'
+filename = 'kc1.csv'
 dataset = load_csv(filename)
+#transformar o texto do csv em numeros
 for i in range(len(dataset[0])-1):
 	str_column_to_float(dataset, i)
 # convert class column to integers
 str_column_to_int(dataset, len(dataset[0])-1)
 # evaluate algorithm
-n_folds = 10
-learn_rate = 0.3
+n_folds = 5
+learn_rate = 0.2 
 n_epochs = 50
 n_prototypes = 50
 scores = evaluate_algorithm(dataset, learning_vector_quantization, n_folds, n_prototypes, learn_rate, n_epochs)

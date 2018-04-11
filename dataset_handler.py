@@ -24,5 +24,5 @@ def str_column_to_int(dataset, column):
 	for i, value in enumerate(unique):
 		lookup[value] = i
 	for row in dataset:
-		row[column] = lookup[row[column]]
+		row[column] = lookup[row[column]] #transformando as classes do dataset em numeros inteiros.
 	return lookup
