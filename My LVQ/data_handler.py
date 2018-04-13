@@ -12,6 +12,7 @@ def load_csv(filename):
 	return dataset
 
 def split_data(df, split, lvq_training_set, knn_test_set):
+    random.shuffle(df[0])
     for i in range(len(df) -1):
         if i < split:
             lvq_training_set.append(df[i])
@@ -28,7 +29,7 @@ def str_column_to_int(dataset, column):
     class_values = [row[column] for row in dataset]
     unique = set(class_values)
     lookup = dict()
-    for i, value in enumerate(unique):
+    for i, value in enumerate(unique, 1):
         lookup[value] = i
     for row in dataset:
         row[column] = lookup[row[column]]
