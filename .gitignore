@@ -1,2 +1,3 @@
 #Ignoring pyc files
 *.pyc
+.idea
