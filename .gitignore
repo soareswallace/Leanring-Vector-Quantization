@@ -1,4 +1,4 @@
 #Ignoring pyc files
 *.pyc
-.idea
+.idea/
 venv/
