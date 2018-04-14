@@ -1,8 +1,8 @@
 import numpy as np
 from learning_vector_quantization import train_prototypes_lvq1
-from data_handler import load_csv, data_conversion_to_float, str_column_to_int, split_data
+from data_handler import load_csv, data_conversion_to_float, str_column_to_int, split_data, data_balance
 from knn import getNeighbors, getResponse, getAccuracy
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn import preprocessing
 
 
 files = ['kc1.csv', 'pc1.csv']
@@ -12,16 +12,25 @@ for filename in files:
         data_conversion_to_float(df, i)
     str_column_to_int(df, len(df[0])-1)
     split = int(0.7*len(df))
+
     lvq_training_set = []
     knn_test_set = []
-    split_data(df, split, lvq_training_set, knn_test_set)
 
-    prototypes_lvq1 = train_prototypes_lvq1(lvq_training_set, 10, 0.2, 50)
+    split_data(df, split, lvq_training_set, knn_test_set)
 
     lvq_training_set = np.array(lvq_training_set)
     knn_test_set = np.array(knn_test_set)
 
-    kn = [1,3]
+    lvq_training_set = data_balance(lvq_training_set)
+
+
+    n_prototypes = 300
+    lrate = 0.2
+    epochs = 40
+
+    prototypes_lvq1 = train_prototypes_lvq1(lvq_training_set, n_prototypes, lrate, epochs)
+
+    kn = [1, 3]
     for k in kn:
         predictions = []
         for row in range(len(knn_test_set)):
