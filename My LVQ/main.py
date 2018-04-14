@@ -8,7 +8,7 @@ import plotly.graph_objs as go
 import plotly
 plotly.tools.set_credentials_file(username='soareswallace', api_key='chx6zB1e9mVinjDrpbUs')
 
-files = ['kc1.csv', 'pc1.csv']
+files = ['kc1.csv', 'kc2.csv', 'pc1.csv']
 for filename in files:
     df = load_csv(filename)  #os dados estao como csv agora
     for i in range(len(df[0])-1):
